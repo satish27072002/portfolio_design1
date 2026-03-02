@@ -2,26 +2,200 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+/* ─────────────────────────────────────────────
+   1. CSS VARIABLES — Light mode (default)
+   ───────────────────────────────────────────── */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 63 100% 96%;        /* ~ivory #FCFFEB */
+    --foreground: 120 1% 22%;         /* ~graphite */
+
+    --card: 63 100% 97%;
+    --card-foreground: 120 1% 22%;
+
+    --popover: 63 100% 97%;
+    --popover-foreground: 120 1% 22%;
+
+    --primary: 349 48% 44%;           /* cherry rose #A93F55 */
+    --primary-foreground: 63 100% 96%;
+
+    --secondary: 210 3% 57%;          /* grey olive #8A8E91 */
+    --secondary-foreground: 120 1% 22%;
+
+    --muted: 210 5% 90%;
+    --muted-foreground: 210 3% 45%;
+
+    --accent: 349 48% 95%;
+    --accent-foreground: 349 48% 35%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 3% 82%;
+    --input: 210 3% 82%;
+    --ring: 349 48% 44%;
+    --radius: 0.5rem;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  /* ─────────────────────────────────────────────
+     2. CSS VARIABLES — Dark mode
+     ───────────────────────────────────────────── */
+  .dark {
+    --background: 120 1% 22%;         /* ~graphite #363736 */
+    --foreground: 63 100% 96%;        /* ~ivory */
+
+    --card: 120 1% 26%;
+    --card-foreground: 63 100% 96%;
+
+    --popover: 120 1% 22%;
+    --popover-foreground: 63 100% 96%;
+
+    --primary: 349 48% 58%;           /* cherry rose, lightened */
+    --primary-foreground: 120 1% 22%;
+
+    --secondary: 210 3% 35%;
+    --secondary-foreground: 63 100% 96%;
+
+    --muted: 120 1% 30%;
+    --muted-foreground: 210 3% 65%;
+
+    --accent: 349 30% 28%;
+    --accent-foreground: 349 48% 85%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 120 1% 32%;
+    --input: 120 1% 32%;
+    --ring: 349 48% 58%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────────────────────────
+   3. BASE STYLES
+   ───────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+
+  /*
+   * MINIMALIST DESIGN
+   * Clean background with subtle depth
+   */
+  body {
+    @apply text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1 { @apply text-4xl font-bold tracking-tight; }
+  h2 { @apply text-3xl font-semibold tracking-tight; }
+  h3 { @apply text-xl font-semibold; }
+  h4 { @apply text-lg font-medium; }
 }
 
+/* ─────────────────────────────────────────────
+   4. PAPER WRAPPER
+   The centred "sheet of paper" that sits on the
+   dark desk. Contains all page content.
+
+   Texture technique:
+   - Layer 1 (feTurbulence SVG): fractal noise grain
+     → blended with background-color via `multiply`
+     → gives authentic paper tooth / grain
+   - Layer 2+3 (CSS gradients): graph-paper grid
+   ───────────────────────────────────────────── */
+
+/* Shared SVG noise — embedded as data URI.
+   Uses feTurbulence fractalNoise + greyscale matrix.
+   The multiply blend darkens ivory only where the
+   noise is dark → organic paper-grain texture. */
+
+.paper-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+.dark .paper-wrapper {
+  background-color: #1a1a1a;
+}
+
+/* ─────────────────────────────────────────────
+   5. UTILITY CLASSES
+   ───────────────────────────────────────────── */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Section wrapper — used by every section */
+  .section-padding {
+    @apply py-20 px-6 md:px-12 max-w-5xl mx-auto;
+  }
+
+  /* Cherry rose underline accent below section headings */
+  .section-accent-bar {
+    @apply block w-10 h-1 bg-[#A93F55] rounded-full mt-2 mb-10;
+  }
+
+  /* Card base */
+  .card-base {
+    @apply bg-card border border-border rounded-xl p-6 transition-all duration-300;
+  }
+
+  /* Card hover — subtle y-lift */
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-md;
+  }
+
+  /* Navbar backdrop */
+  .nav-blur {
+    @apply backdrop-blur-lg bg-background/90 border-b border-border/10;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   6. MINIMALIST BACKGROUND
+   Clean, subtle gradient background
+   ───────────────────────────────────────────── */
+body {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.dark body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #171717 100%);
+}
+
+/* ─────────────────────────────────────────────
+   7. REDUCED MOTION
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
