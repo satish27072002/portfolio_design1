@@ -250,9 +250,17 @@ export default function ContactModal({ children }: ContactModalProps) {
             <p className="text-sm text-muted-foreground max-w-xs">
               I&apos;ve been notified. I&apos;ll get the VM back online shortly — check back in a few minutes.
             </p>
-            <Button variant="outline" onClick={() => setOpen(false)} className="mt-2">
-              Close
-            </Button>
+            <div className="flex gap-2 mt-2">
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                Close
+              </Button>
+              <Button
+                onClick={() => setMode("connect")}
+                className="bg-[#A93F55] hover:bg-[#8f3447] text-white"
+              >
+                Let&apos;s connect
+              </Button>
+            </div>
           </div>
         )}
       </DialogContent>
