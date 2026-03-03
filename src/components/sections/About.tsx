@@ -8,22 +8,22 @@ import { motion } from "framer-motion";
 
 const capabilities = [
   {
+    icon: Lightbulb,
+    title: "Product Thinking",
+    description:
+      "I work closely with stakeholders to translate requirements into solutions that ship on time and move metrics.",
+  },
+  {
     icon: Code2,
     title: "Frontend",
     description:
-      "Building fast, accessible UIs with React, Next.js, and Tailwind. I care about performance and user experience.",
+      "Frontend is where I spend a lot of energy, getting interactions right, keeping things fast, and making sure the UI actually feels good. React, Next.js, Tailwind, and shadcn/ui are my daily tools.",
   },
   {
     icon: Server,
     title: "Backend",
     description:
-      "Designing reliable APIs and data pipelines with Node.js, Python, and PostgreSQL.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Product Thinking",
-    description:
-      "I work closely with stakeholders to translate requirements into solutions that ship on time and move metrics.",
+      "Designing reliable, microservice-based APIs and data pipelines with Node.js, Python, and PostgreSQL.",
   },
 ];
 
@@ -48,15 +48,19 @@ export default function About() {
           <Reveal className="flex-1">
             <div className="max-w-2xl">
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Hi, I&apos;m {SITE.name.split(" ")[0]} — a software engineer who
-                loves building products that are fast, accessible, and genuinely
-                useful. I have experience across the full stack and enjoy owning
-                features end-to-end, from database schema to polished UI.
+                Hi, I&apos;m {SITE.name.split(" ")[0]}. I build things, break things,
+                and build them better. I genuinely enjoy the full journey from sketching
+                out a UI to wiring up the backend, and I care a lot about how things
+                feel to use, not just how they work under the hood.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                When I&apos;m not coding I&apos;m exploring new frameworks, reading
-                about system design, or finding the best coffee shop to work from.
-                I&apos;m currently open to full-time and contract opportunities.
+                Outside of code I&apos;m watching football, cricket, Star Wars or Marvel
+                (in that order, most days). Space podcasts are my thinking music, there&apos;s
+                something about the scale of the universe that puts everything else in
+                perspective. Professionally, I&apos;m in a lucky spot: we&apos;re living through
+                an AI revolution and I actually get to build with these tools. I want to
+                join a team where that matters, where I can contribute to something real
+                and leave a visible dent.
               </p>
             </div>
           </Reveal>

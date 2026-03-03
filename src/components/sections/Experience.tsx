@@ -44,16 +44,12 @@ export default function Experience() {
                   {/* Content card */}
                   <div
                     className={`ml-12 md:ml-0 md:w-[45%] ${
-                      i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"
+                      i % 2 === 0 ? "md:pr-12" : "md:pl-12"
                     }`}
                   >
                     <div className="group p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
                       {/* Company logo */}
-                      <div
-                        className={`flex items-center gap-3 mb-3 ${
-                          i % 2 === 0 ? "md:flex-row-reverse" : ""
-                        }`}
-                      >
+                      <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center overflow-hidden flex-shrink-0">
                           {exp.logo ? (
                             <Image
@@ -74,11 +70,7 @@ export default function Experience() {
                       </div>
 
                       {/* Date */}
-                      <div
-                        className={`flex items-center gap-1.5 text-sm text-muted-foreground/60 mb-4 ${
-                          i % 2 === 0 ? "md:flex-row-reverse" : ""
-                        }`}
-                      >
+                      <div className="flex items-center gap-1.5 text-sm text-muted-foreground/60 mb-4">
                         <Calendar className="h-3.5 w-3.5" />
                         <span className="font-mono">
                           {exp.start} — {exp.end}
@@ -90,9 +82,7 @@ export default function Experience() {
                         {exp.bullets.map((bullet, j) => (
                           <li
                             key={j}
-                            className={`text-sm text-muted-foreground flex gap-2 ${
-                              i % 2 === 0 ? "md:flex-row-reverse" : ""
-                            }`}
+                            className="text-sm text-muted-foreground flex gap-2"
                           >
                             <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/40 flex-shrink-0" />
                             {bullet}

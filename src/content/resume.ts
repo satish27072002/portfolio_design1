@@ -10,15 +10,25 @@ export type Education = {
 
 export const education: Education[] = [
   {
-    institution: "University Name",
-    degree: "Bachelor of Science",
+    institution: "Blekinge Institute of Technology",
+    degree: "Master of Science",
     field: "Computer Science",
-    start: "Aug 2019",
-    end: "May 2023",
-    gpa: "3.8 / 4.0",
+    start: "Jan 2024",
+    end: "Present",
     highlights: [
-      "Dean's List — 4 semesters",
-      "Relevant coursework: Data Structures & Algorithms, Operating Systems, Machine Learning",
+      "Student Ambassador — assisted 38+ incoming students with orientation, housing, and academic guidance",
+      "Secured a 50% tuition scholarship for academic excellence",
+    ],
+  },
+  {
+    institution: "Jawaharlal Nehru Technological University",
+    degree: "Bachelor of Technology",
+    field: "Computer Science",
+    start: "Aug 2020",
+    end: "Nov 2023",
+    highlights: [
+      "Graduated in the Top 1% of the Bachelor of Technology program",
+      "Co-authored a research paper on Smart Contracts",
     ],
   },
 ];

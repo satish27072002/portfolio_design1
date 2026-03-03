@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Linkedin, Mail, FileText, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Mail, FileText, ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FadeIn from "@/components/motion/FadeIn";
 import { SITE } from "@/lib/constants";
@@ -15,7 +15,7 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
@@ -26,55 +26,79 @@ export default function Hero() {
     >
       {/* Animated background gradient */}
       <motion.div
-        className="absolute inset-0 opacity-30 dark:opacity-20"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent)",
+            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent)",
         }}
         animate={{
           background: [
-            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent)",
-            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(167, 139, 250, 0.3), transparent)",
-            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent)",
+            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent)",
+            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.15), transparent)",
+            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent)",
           ],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Floating particles */}
+      {/* Floating orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-foreground/20 rounded-full"
+            className="absolute w-64 h-64 rounded-full opacity-20"
             style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + (i % 3) * 20}%`,
+              background: `radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent 70%)`,
+              left: `${10 + i * 25}%`,
+              top: `${20 + (i % 2) * 40}%`,
             }}
             animate={{
+              x: [0, 30, 0],
               y: [0, -20, 0],
-              opacity: [0.2, 0.5, 0.2],
+              scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: 3 + i * 0.5,
+              duration: 6 + i * 2,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: i * 0.3,
+              delay: i * 0.5,
             }}
           />
         ))}
       </div>
 
+      {/* Grid pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+        }}
+      />
+
       <motion.div style={{ y, opacity }} className="relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Text content */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center order-2 lg:order-1">
             <FadeIn delay={0.1}>
-              <motion.p
-                className="text-sm font-mono text-primary/60 tracking-widest uppercase mb-4"
+              <motion.div
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary/70 text-sm mb-6 w-fit"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>Available for work</span>
+              </motion.div>
+            </FadeIn>
+
+            <FadeIn delay={0.15}>
+              <motion.p
+                className="text-sm font-medium text-primary/70 tracking-widest uppercase mb-3"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
               >
                 Hello, I&apos;m
               </motion.p>
@@ -82,7 +106,7 @@ export default function Hero() {
 
             <FadeIn delay={0.2}>
               <motion.h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 leading-[1.1]"
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 leading-[1.05]"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
@@ -92,35 +116,35 @@ export default function Hero() {
               </motion.h1>
             </FadeIn>
 
-            <FadeIn delay={0.3}>
+            <FadeIn delay={0.25}>
               <motion.p
-                className="text-xl sm:text-2xl text-muted-foreground mb-6 font-light"
+                className="text-xl sm:text-2xl text-foreground/70 mb-5 font-medium"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
               >
                 {SITE.role}
               </motion.p>
             </FadeIn>
 
-            <FadeIn delay={0.4}>
+            <FadeIn delay={0.3}>
               <motion.p
                 className="text-base text-muted-foreground/80 max-w-lg mb-8 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
                 {SITE.pitch}
               </motion.p>
             </FadeIn>
 
             {/* CTA buttons */}
-            <FadeIn delay={0.5}>
+            <FadeIn delay={0.35}>
               <motion.div
                 className="flex flex-wrap gap-3 mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
               >
                 <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
                   <a href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">
@@ -128,19 +152,19 @@ export default function Hero() {
                     Resume
                   </a>
                 </Button>
-                <Button asChild variant="outline" className="border-foreground/20">
+                <Button asChild variant="outline" className="border-border hover:bg-primary/5">
                   <a href={SITE.github} target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4 mr-2" />
                     GitHub
                   </a>
                 </Button>
-                <Button asChild variant="outline" className="border-foreground/20">
+                <Button asChild variant="outline" className="border-border hover:bg-primary/5">
                   <a href={`https://${SITE.linkedin}`} target="_blank" rel="noopener noreferrer">
                     <Linkedin className="h-4 w-4 mr-2" />
                     LinkedIn
                   </a>
                 </Button>
-                <Button asChild variant="outline" className="border-foreground/20">
+                <Button asChild variant="outline" className="border-border hover:bg-primary/5">
                   <a href={`mailto:${SITE.email}`}>
                     <Mail className="h-4 w-4 mr-2" />
                     Email
@@ -166,30 +190,29 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Photo with 3D tilt effect */}
-          <FadeIn delay={0.3} className="flex justify-center lg:justify-end">
+          {/* Right: Photo with 3D effect */}
+          <FadeIn delay={0.3} className="flex justify-center lg:justify-end order-1 lg:order-2">
             <motion.div
               className="relative"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              whileHover={{ scale: 1.02 }}
-              style={{ perspective: 1000 }}
+              initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
+              whileHover={{ scale: 1.02, rotate: 0 }}
             >
               {/* Glow effect */}
               <motion.div
-                className="absolute -inset-4 rounded-2xl blur-2xl"
+                className="absolute -inset-6 rounded-3xl"
                 style={{
-                  background: "linear-gradient(135deg, rgba(120, 119, 198, 0.4), transparent, rgba(167, 139, 250, 0.2))",
+                  background: "linear-gradient(135deg, rgba(99, 102, 241, 0.4), transparent 50%, rgba(168, 85, 247, 0.2))",
                 }}
                 animate={{
-                  opacity: [0.5, 0.8, 0.5],
+                  opacity: [0.4, 0.7, 0.4],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
 
-              {/* Photo container with 3D effect */}
-              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[500px] rounded-2xl overflow-hidden">
+              {/* Photo container */}
+              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/photo.jpg"
                   alt={`Photo of ${SITE.name}`}
@@ -199,17 +222,20 @@ export default function Hero() {
                   priority
                 />
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                
+                {/* Border */}
+                <div className="absolute inset-0 rounded-2xl border border-white/10" />
               </div>
 
               {/* Decorative elements */}
               <motion.div
-                className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-primary/30 rounded-tr-lg"
+                className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg"
                 animate={{ rotate: [0, 5, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
               <motion.div
-                className="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-primary/30 rounded-bl-lg"
+                className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-primary/40 rounded-bl-lg"
                 animate={{ rotate: [0, -5, 0] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
               />

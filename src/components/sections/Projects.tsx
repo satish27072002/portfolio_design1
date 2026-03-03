@@ -28,7 +28,10 @@ export default function Projects() {
           <p className="text-sm font-mono text-primary/60 tracking-widest uppercase mb-2">
             Projects
           </p>
-          <h2 className="text-4xl font-bold text-foreground mb-8">Things I&apos;ve built</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-3">Things I&apos;ve built</h2>
+          <p className="text-sm text-muted-foreground/60 mb-8">
+            Note: Some live demos may be offline due to resource constraints. Use the Ping Me option to notify me if you&apos;d like to see a demo.
+          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
