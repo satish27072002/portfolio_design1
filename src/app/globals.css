@@ -132,11 +132,6 @@
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: #fafafa;
-}
-
-.dark .paper-wrapper {
-  background-color: #1a1a1a;
 }
 
 /* ─────────────────────────────────────────────
