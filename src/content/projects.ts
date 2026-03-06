@@ -23,7 +23,7 @@ export const projects: Project[] = [
   {
     title: "Mental Health Coach",
     description:
-      "Safety-first mental health coaching web app with LangGraph multi-agent orchestration for coaching, therapist discovery, and appointment booking.",
+      "At the end of the day, you just need someone to talk to. Safety-first mental health coaching web app with LangGraph multi-agent orchestration for coaching, therapist discovery, and appointment booking.",
     outcomes: [
       "Built LangGraph multi-agent system with context-aware LLM-based intent classification and tiered crisis detection",
       "Engineered production-grade observability: structured JSON logging with correlation IDs, LangSmith tracing, and rate limiting",
