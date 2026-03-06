@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap, Mail, Github, Linkedin } from "lucide-react";
+import { Zap, Mail, Github, Linkedin, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/motion/Reveal";
 import ContactModal from "@/components/sections/ContactModal";
@@ -50,6 +50,12 @@ export default function Contact() {
                   <a href={`https://${SITE.linkedin}`} target="_blank" rel="noopener noreferrer">
                     <Linkedin className="h-5 w-5 mr-2" />
                     LinkedIn
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="border-border/50">
+                  <a href={SITE.resumeUrl} download>
+                    <FileText className="h-5 w-5 mr-2" />
+                    Download Resume
                   </a>
                 </Button>
               </div>

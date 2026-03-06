@@ -147,9 +147,9 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.35 }}
               >
                 <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
-                  <a href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={SITE.resumeUrl} download>
                     <FileText className="h-4 w-4 mr-2" />
-                    Resume
+                    Download Resume
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="border-border hover:bg-primary/5">

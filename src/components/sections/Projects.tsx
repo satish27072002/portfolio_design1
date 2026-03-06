@@ -1,16 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import Reveal from "@/components/motion/Reveal";
 import { projects } from "@/content/projects";
 import { motion } from "framer-motion";
@@ -38,12 +32,27 @@ export default function Projects() {
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={i * 0.1}>
               <motion.div
-                className="group relative bg-card/30 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500"
+                className="group relative bg-card/30 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 cursor-pointer"
                 whileHover={{ y: -4 }}
               >
+                {/* Full-card link — sits below interactive elements */}
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="absolute inset-0 z-0"
+                  aria-label={`View ${project.title} case study`}
+                />
+
                 {/* Project image */}
                 <div className="relative w-full h-48 sm:h-56 overflow-hidden">
-                  {project.image ? (
+                  {project.images && project.images.length > 0 ? (
+                    <Image
+                      src={project.images[0]}
+                      alt={`${project.title} screenshot`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : project.image ? (
                     <Image
                       src={project.image}
                       alt={`${project.title} screenshot`}
@@ -63,17 +72,18 @@ export default function Projects() {
                       </span>
                     </div>
                   )}
-                  {/* Image overlay */}
+                  {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-                  {/* Hover overlay with links */}
-                  <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                  {/* Hover overlay with GitHub / Live links — z-10 so they're above the card link */}
+                  <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 z-10">
                     {project.github && (
                       <Button asChild size="sm" variant="outline">
                         <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Github className="h-4 w-4 mr-2" />
                           Code
@@ -82,7 +92,12 @@ export default function Projects() {
                     )}
                     {project.live && (
                       <Button asChild size="sm">
-                        <a href={project.live} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <ExternalLink className="h-4 w-4 mr-2" />
                           Live
                         </a>
@@ -91,8 +106,8 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
+                {/* Content — z-10 so text sits above the card link */}
+                <div className="relative p-6 z-10 pointer-events-none">
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <h3 className="font-semibold text-xl text-foreground group-hover:text-primary transition-colors">
                       {project.title}
@@ -126,25 +141,6 @@ export default function Projects() {
                       </Badge>
                     ))}
                   </div>
-
-                  {/* Case study */}
-                  {project.caseStudy && (
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="link" className="px-0 mt-4 text-primary">
-                          Read case study
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                        <DialogHeader>
-                          <DialogTitle>{project.title}</DialogTitle>
-                        </DialogHeader>
-                        <div className="prose prose-sm dark:prose-invert mt-2">
-                          <p>{project.caseStudy}</p>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  )}
                 </div>
               </motion.div>
             </Reveal>
